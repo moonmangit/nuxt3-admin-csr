@@ -11,7 +11,10 @@
     "lint": "eslint --ext .js,.vue,.ts,.tsx --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@nuxtjs/google-fonts": "^3.2.0",
+    "@vueuse/nuxt": "^10.9.0",
     "nuxt": "^3.11.2",
+    "nuxt-icon": "^0.6.10",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
