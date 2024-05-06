@@ -1,0 +1,7 @@
+.app-input {
+  @apply w-full p-2 rounded-md bg-transparent border outline-none;
+
+  @apply border-surface-300 dark:border-surface-600;
+  @apply text-surface-700 dark:text-surface-200;
+  @apply focus:border-primary-500;
+}

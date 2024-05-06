@@ -5,6 +5,10 @@ export default <Partial<Config>>{
   darkMode: "class",
   theme: {
     extend: {
+      container: {
+        center: true,
+        padding: "1rem",
+      },
       colors: {
         "primary-50": "rgb(var(--primary-50))",
         "primary-100": "rgb(var(--primary-100))",
