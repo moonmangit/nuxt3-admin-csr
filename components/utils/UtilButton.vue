@@ -41,7 +41,7 @@ withDefaults(
 
 <style scoped>
 .util-button {
-  @apply p-1 px-3 rounded-md duration-300;
+  @apply p-1 px-3 rounded-md duration-300 border border-transparent;
   @apply ring-0 m-[2px] font-bold;
   @apply flex items-center gap-1;
   &:hover {

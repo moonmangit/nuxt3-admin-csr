@@ -3,6 +3,11 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+    <!-- Service -->
+    <ElToastList
+      :content="useToast().toastList.value"
+      @close="useToast().remove($event)"
+    />
   </div>
 </template>
 

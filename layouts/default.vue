@@ -6,18 +6,21 @@
           <h1>{{ config.title }}</h1>
           <p class="text-sm text-primary-500">{{ config.subtitle }}</p>
         </span>
-        <span class="flex">
-          <UtilButton
-            icon-name="mdi:light-flood-down"
-            variant="ghost"
-            @click="useDarkMode().toggle()"
+        <span class="flex gap-2">
+          <PartLayoutIndexNavProfile
+            class="hidden md:flex"
+            :content="{
+              name: 'Thanapon P.',
+              email: 'admin@mail.com',
+              profileImage: 'https://picsum.photos/seed/1234/200/300',
+            }"
           />
           <UtilButton
-            class="!flex md:!hidden"
+            variant="ghost"
             icon-name="mdi:menu"
-            variant="ghost"
-            @click="onOpenSideNav"
-          />
+            class="md:!hidden !flex"
+            @click.prevent="onOpenSideNav"
+          ></UtilButton>
         </span>
       </nav>
       <div class="flex gap-4">
@@ -177,7 +180,7 @@ watch(
 
 <style scoped>
 .layout {
-  @apply w-screen h-screen overflow-auto  duration-300;
+  @apply w-screen h-screen overflow-y-auto overflow-x-hidden duration-300;
   @apply dark:text-surface-400 dark:bg-surface-900;
   @apply text-surface-600 bg-surface-50;
 }
