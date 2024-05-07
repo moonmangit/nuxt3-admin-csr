@@ -1,4 +1,4 @@
-const active = useLocalStorage("darkMode", false);
+const active = useLocalStorage("darkMode", true);
 const toggle = () => {
   active.value = !active.value;
   document.body.classList.toggle("dark", active.value);

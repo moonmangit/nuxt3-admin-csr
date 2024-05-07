@@ -1,0 +1,34 @@
+/* invisible scrollbar */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* primary-500 handle, invisible track */
+.primary-scrollbar {
+  --width: 5px;
+  --color: var(--primary-500);
+  --color-hover: var(--primary-700);
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: var(--width);
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px transparent;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: rgb(var(--color));
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--color-hover));
+  }
+}

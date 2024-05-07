@@ -1,4 +1,5 @@
 @import "./_input.css";
+@import "./_scroll.css";
 
 @tailwind base;
 @tailwind components;

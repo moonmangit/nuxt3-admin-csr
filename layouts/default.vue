@@ -10,15 +10,15 @@
           <PartLayoutIndexNavProfile
             class="hidden md:flex"
             :content="{
-              name: 'Thanapon P.',
-              email: 'admin@mail.com',
-              profileImage: 'https://picsum.photos/seed/1234/200/300',
+              name: profile.name,
+              email: profile.email,
+              profileImage: profile.profileImage,
             }"
           />
           <UtilButton
             variant="ghost"
             icon-name="mdi:menu"
-            class="md:!hidden !flex"
+            class="md:!hidden !flex text-xl"
             @click.prevent="onOpenSideNav"
           ></UtilButton>
         </span>
@@ -47,13 +47,14 @@
     <aside
       class="z-30 fixed inset-0 duration-300"
       :class="{
-        'pointer-events-none bg-surface-950/0 delay-300': !sideNavActive,
-        'pointer-events-auto bg-surface-950/40 dark:bg-surface-950/70':
+        'pointer-events-none bg-surface-950/0 opacity-0 delay-300':
+          !sideNavActive,
+        'pointer-events-auto bg-surface-950/40 opacity-100 dark:bg-surface-950/70':
           sideNavActive,
       }"
     >
       <div
-        class="absolute inset-y-0 w-[min(250px,100%)] bg-white dark:bg-surface-900 py-4 pointer-events-auto duration-300"
+        class="absolute inset-y-0 w-[min(250px,100%)] bg-white dark:bg-surface-900 py-4 pointer-events-auto duration-300 flex flex-col gap-y-5 overflow-y-auto primary-scrollbar"
         :class="{
           'translate-x-0 delay-300': sideNavActive,
           '-translate-x-full ': !sideNavActive,
@@ -62,107 +63,58 @@
         <button class="absolute right-4 top-3" @click="onCloseSideNav">
           <Icon name="mdi:close"></Icon>
         </button>
+        <!-- Profile -->
+        <div class="flex gap-x-2 px-4">
+          <div class="grid grid-cols-[max-content,1fr] gap-x-2 items-center">
+            <div class="row-span-2 border-surface-300 dark:border-surface-600">
+              <div class="size-10">
+                <img
+                  class="w-full h-full object-cover rounded-full"
+                  :src="profile.profileImage"
+                />
+              </div>
+            </div>
+            <h1>{{ profile.name }}</h1>
+            <p class="text-sm text-gray-400 dark:text-gray-600">
+              {{ profile.email }}
+            </p>
+          </div>
+        </div>
+        <!-- Menu -->
         <PartLayoutIndexMenuGroups :content="menuGroups" />
+        <!-- Footer -->
+        <footer class="px-3 flex justify-between items-center mt-auto">
+          <UtilButton
+            icon-name="mdi:theme-light-dark"
+            variant="ghost"
+            @click.prevent="useDarkMode().toggle()"
+          />
+          <UtilButton text="ออกจากระบบ" variant="ghost" color="red" />
+          <UtilButton icon-name="mdi:help" variant="ghost" />
+        </footer>
       </div>
     </aside>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { menuConfig } from "~/assets/configs/menu";
 import type { MenuGroup } from "~/components/parts/layout/index/MenuGroups.vue";
 
 const config = {
   title: "ระบบจัดการเนื้อหาเว็บไซต์",
   subtitle: "โรงเรียนบ้านวังตามัว",
 };
+const menuGroups: MenuGroup[] = menuConfig;
 
-const menuGroups: MenuGroup[] = [
-  {
-    id: "general",
-    title: "ทั่วไป",
-    menus: [
-      {
-        id: "dashboard",
-        title: "แดชบอร์ด",
-        iconName: "mdi:view-dashboard",
-        to: "/",
-      },
-      {
-        id: "settings",
-        title: "ตั้งค่า",
-        iconName: "mdi:cog",
-        to: "/settings",
-      },
-    ],
-  },
-  {
-    id: "content",
-    title: "เนื้อหา",
-    menus: [
-      {
-        id: "news",
-        title: "ข่าวสาร",
-        iconName: "mdi:newspaper",
-        to: "/news",
-      },
-      {
-        id: "highlight",
-        title: "เนื้อหาโดดเด่น",
-        iconName: "mdi:star",
-        to: "/highlight",
-      },
-      {
-        id: "event",
-        title: "กิจกรรม",
-        iconName: "mdi:calendar",
-        to: "/event",
-      },
-      {
-        id: "asset",
-        title: "สื่อ",
-        iconName: "mdi:file-document",
-        to: "/asset",
-      },
-      {
-        id: "link",
-        title: "ลิงค์",
-        iconName: "mdi:link",
-        to: "/link",
-      },
-    ],
-  },
-  {
-    id: "system",
-    title: "ระบบ",
-    menus: [
-      // user, role, permission, log
-      {
-        id: "user",
-        title: "ผู้ใช้",
-        iconName: "mdi:account",
-        to: "/user",
-      },
-      {
-        id: "role",
-        title: "บทบาท",
-        iconName: "mdi:shield-account",
-        to: "/role",
-      },
-      {
-        id: "permission",
-        title: "สิทธิ์",
-        iconName: "mdi:key",
-        to: "/permission",
-      },
-      {
-        id: "log",
-        title: "บันทึก",
-        iconName: "mdi:history",
-        to: "/log",
-      },
-    ],
-  },
-];
+// Profile
+const profile = computed(() => {
+  return {
+    name: "Thanapon P.",
+    email: "admin@mail.com",
+    profileImage: "https://picsum.photos/seed/1234/200/300",
+  };
+});
 
 // Navigation Plane
 const sideNavActive = ref(false);

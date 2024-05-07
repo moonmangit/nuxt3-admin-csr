@@ -23,7 +23,7 @@ withDefaults(
     text?: string;
     iconName?: string;
     iconBefore?: boolean;
-    color?: "primary" | "red" | "emerald";
+    color?: "surface" | "primary" | "red" | "emerald";
     variant?: "solid" | "outline" | "ghost";
     loading?: boolean;
   }>(),
@@ -33,7 +33,7 @@ withDefaults(
     text: "",
     iconName: "",
     iconBefore: false,
-    color: "primary",
+    color: "surface",
     variant: "solid",
   },
 );
@@ -54,6 +54,22 @@ withDefaults(
 .util-button--loading,
 .util-button:disabled {
   @apply opacity-70 cursor-not-allowed pointer-events-none;
+}
+
+/* Surface */
+.util-button--surface-solid {
+  @apply bg-surface-800 text-surface-300;
+  @apply dark:bg-surface-300 dark:text-surface-800;
+  @apply ring-surface-950/40;
+}
+.util-button--surface-outline {
+  @apply ring-surface-950/40 border border-surface-800 dark:border-surface-300 text-surface-800 dark:text-surface-300;
+}
+.util-button--surface-ghost {
+  @apply text-surface-800 dark:text-surface-300 !ring-0;
+  &:hover {
+    @apply bg-surface-800/20 dark:bg-surface-300/10;
+  }
 }
 
 /* Primary */
